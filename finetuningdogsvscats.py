@@ -65,3 +65,8 @@ nn.init.xavier_uniform_(finetune_net.fc.weight)
 
 # Call the function with a very small learning rate
 train_fine_tuning(finetune_net, 5e-5)
+
+# Train the model entirely from scratch, with same epochs, to compare
+scratch_net = torchvision.models.resnet18()
+scratch_net.fc = nn.Linear(scratch_net.fc.in_features, 2)
+train_fine_tuning(scratch_net, 5e-4, param_group=False)
