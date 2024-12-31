@@ -7,7 +7,7 @@ from d2l import torch as d2l
 # Path to the dataset
 data_dir = '/Users/maxwellmalinofsky/Desktop/portfolio/dataset'
 
-# Split into training and test images
+# create two instances to read all the image files in the training and testing datasets
 train_imgs = torchvision.datasets.ImageFolder(os.path.join(data_dir, 'train'))
 test_imgs = torchvision.datasets.ImageFolder(os.path.join(data_dir, 'test'))
 
