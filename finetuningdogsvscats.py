@@ -4,11 +4,14 @@ import torchvision
 from torch import nn
 from d2l import torch as d2l
 
+# Path to the dataset
 data_dir = '/Users/maxwellmalinofsky/Desktop/portfolio/dataset'
 
+# Split into training and test images
 train_imgs = torchvision.datasets.ImageFolder(os.path.join(data_dir, 'train'))
 test_imgs = torchvision.datasets.ImageFolder(os.path.join(data_dir, 'test'))
 
+# Display 8 images of cats and dogs each
 dogs = [train_imgs[i][0] for i in range(8)]
 cats = [train_imgs[-i - 1][0] for i in range(8)]
 d2l.show_images(dogs + cats, 2, 8, scale=1.4)
@@ -29,10 +32,11 @@ test_augs = torchvision.transforms.Compose([
     torchvision.transforms.ToTensor(),
     normalize])
 
+# Download ResNet-18 weights, trained on ImageNet dataset
 pretrained_net = torchvision.models.resnet18(pretrained=True)
 pretrained_net.fc
 
-#fine tune with 2 features/output layers, cats and dogs
+# Modify output layer for 2 features, cats and dogs
 finetune_net = torchvision.models.resnet18(pretrained=True)
 finetune_net.fc = nn.Linear(finetune_net.fc.in_features, 2)
 nn.init.xavier_uniform_(finetune_net.fc.weight)
@@ -59,4 +63,5 @@ nn.init.xavier_uniform_(finetune_net.fc.weight)
     
     d2l.train_ch13(net, train_iter, test_iter, loss, trainer, num_epochs, devices)
 
+# Call the function with a very small learning rate
 train_fine_tuning(finetune_net, 5e-5)
