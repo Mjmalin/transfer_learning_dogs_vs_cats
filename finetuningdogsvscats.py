@@ -3,7 +3,6 @@ import torch
 import torchvision
 from torch import nn
 from d2l import torch as d2l
-import matplotlib.pyplot as plt
 
 # Define the path to your new dataset
 data_dir = '/Users/maxwellmalinofsky/Desktop/portfolio/dataset'
